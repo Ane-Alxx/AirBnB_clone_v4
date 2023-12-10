@@ -23,18 +23,18 @@ def close_db(error):
 
 @app.route('/0-hbnb/', strict_slashes=False)
 def hbnb():
-    """ HBNB is alive! """
+    """ START """
 
-    # Optimize sorting
+    """ Optimize sorting """
     states = sorted(storage.all(State).values(), key=lambda k: k.name)
-    cities = {}  # Create dictionary to avoid unnecessary sorting
+    cities = {}  """Create dictionary to avoid unnecessary sorting"""
     for state in states:
         cities[state.id] = sorted(state.cities, key=lambda k: k.name)
 
     amenities = sorted(storage.all(Amenity).values(), key=lambda k: k.name)
 
-    # Optimize data transfer and lazy loading
-    places = {}  # Dictionary for lazy loading places
+    """Optimize data transfer and lazy loading"""
+    places = {}  """Dictionary for lazy loading places"""
     def get_places(state_id):
         if state_id not in places:
             places[state_id] = storage.all(Place).filter(Place.state_id == state_id)
