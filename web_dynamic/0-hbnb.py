@@ -28,13 +28,13 @@ def hbnb():
 
     """Optimized sorting"""
     states = sorted(states, key=lambda k: k.name)
-    cities = {}  """ Dictionary to store cities with state association """
+    cities = {}
     for state in states:
         state_cities = sorted(state.cities, key=lambda k: k.name)
         cities[state.id] = state_cities
 
     """ Lazy loading of places """
-    places = {}  """ Dictionary to store places with lazy loading """
+    places = {}
     def get_places(state_id):
         if state_id not in places:
             places[state_id] = storage.all(Place).filter(Place.state_id == state_id)
